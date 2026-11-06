@@ -1,8 +1,7 @@
 ```bash
 python -m venv .venv
-# Windows:
 .venv\Scripts\activate
-# Linux/macOS:
+
 source .venv/bin/activate
 pip install -r requirements.txt
 ```
@@ -39,13 +38,3 @@ API
 - `POST /sync` — синхронізуватися з відомими вузлами
 - `POST /block` — прийняти блок від сусіда
 - `POST /chain/replace` — перевірити та прийняти альтернативний ланцюг
-
-## Архітектура
-- `wallet.py` — Ed25519, адреса й підпис.
-- `transaction.py` — детермінована серіалізація транзакції та перевірка підпису.
-- `block.py` — заголовок блоку, SHA-256, дерево Меркла та Proof of Work.
-- `blockchain.py` — мемпул, баланс/nonce, майнінг, перевірка та вибір ланцюга за сумарною роботою.
-- `node.py` — HTTP API та поширення блоків/транзакцій між вузлами.
-- `main.py` — консольні команди.
-- `tests/` — автоматичні тести.
-- `experiment.py` — експеримент складності майнінгу.
