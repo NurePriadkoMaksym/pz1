@@ -241,6 +241,27 @@
           "txid": "2a3e9e625b33afbe500f289df1f12ed00efacfd068360e5d990a6f13529ea6c5"
         }
       ]
+    },
+    {
+      "index": 12,
+      "timestamp": 1793987328.3974125,
+      "previous_hash": "015df13ca673748a9d0bcf0897df2f85feb6af16bf7c361a6ec9827abebabfb8",
+      "merkle_root": "c5e3ee9b5234fd6733728fa43a089336fd1bc2ce0952cf569e4c4615a99064af",
+      "difficulty": 1,
+      "nonce": 19,
+      "hash": "08dea28d95243d69957bc03fe83b680342f2fee74651de19e8496752759d96e6",
+      "transactions": [
+        {
+          "sender": "COINBASE",
+          "recipient": "64edc2e5fedf9bec60dd57b6dee3ac3b59985eb6",
+          "amount": 50.0,
+          "fee": 0.0,
+          "nonce": 12,
+          "public_key": "",
+          "signature": "",
+          "txid": "80e3653b0c2a91d98fe20a620212e2d2639f23099dc2d95294daed5721b67e6a"
+        }
+      ]
     }
   ]
 }

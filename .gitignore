@@ -1,3 +1,4 @@
 __pycache__/\n*.py[cod]\n.venv/\nnode*.json\nwallet*.json\nmining_experiment.png\n
 start_blockchain.bat
 mining_experiment.png
+pz1.zip
