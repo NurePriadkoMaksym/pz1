@@ -1,4 +1,3 @@
-"""Блок, дерево Меркла та Proof of Work."""
 import hashlib, json, time
 from transaction import Transaction
 

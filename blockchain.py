@@ -1,4 +1,3 @@
-"""Логіка навчального блокчейну: мемпул, баланс, PoW і перевірка."""
 import json, os, time, hashlib
 from block import Block, canonical
 from transaction import Transaction
@@ -25,17 +24,20 @@ class Blockchain:
         else:
             self.chain = [self._genesis()]
         self._save()
+
     def _genesis(self):
         b = Block(0, 1700000000.0, "0"*64, [], self.initial_difficulty, 0)
         b.mine()
         return b
     @property
+
     def last(self): return self.chain[-1]
     def _save(self):
         if self.path:
             with open(self.path, "w", encoding="utf-8") as f:
                 json.dump({"initial_difficulty":self.initial_difficulty,
                            "chain":[b.to_dict() for b in self.chain]}, f, indent=2)
+
     def balance(self, address, chain=None):
         bal = 0.0
         for block in (chain or self.chain):
@@ -45,13 +47,16 @@ class Blockchain:
                     if tx.sender == address: bal -= tx.amount + tx.fee
                     if tx.recipient == address: bal += tx.amount
         return round(bal, 8)
+
     def next_nonce(self, address, chain=None):
         used = [tx.nonce for b in (chain or self.chain) for tx in b.transactions
                 if tx.sender == address and tx.sender != "COINBASE"]
         used += [tx.nonce for tx in self.mempool if tx.sender == address]
         return max(used, default=-1) + 1
+
     def _spent_pending(self, address):
         return sum(tx.amount + tx.fee for tx in self.mempool if tx.sender == address)
+
     def add_transaction(self, tx):
         if not tx.valid_shape(): raise ValueError("Некоректні поля або txid")
         if not tx.verify_signature(): raise ValueError("Недійсний цифровий підпис")
@@ -63,6 +68,7 @@ class Blockchain:
             raise ValueError("Недостатньо коштів")
         self.mempool.append(tx)
         return True
+
     def expected_difficulty(self, chain=None):
         c = chain or self.chain
         if len(c) <= 1 or (len(c)-1) % RETARGET_INTERVAL:
@@ -74,6 +80,7 @@ class Blockchain:
         if elapsed < expected / 2: d += 1
         elif elapsed > expected * 2: d -= 1
         return max(1, min(MAX_DIFFICULTY, d))
+
     def mine_block(self, miner):
         included = []
         pending = sorted(self.mempool, key=lambda t:(t.sender,t.nonce))
@@ -93,6 +100,7 @@ class Blockchain:
         self.mempool = [t for t in self.mempool if t not in included]
         self._save()
         return b
+
     def validate_chain(self, chain=None):
         c = chain or self.chain
         if not c or c[0].index != 0 or c[0].previous_hash != "0"*64: return False
@@ -118,9 +126,11 @@ class Blockchain:
             cb = b.transactions[0]
             if cb.amount > REWARD + fees + 1e-8 or cb.amount < 0 or cb.fee != 0: return False
         return True
+
     def next_nonce_for_chain(self, address, chain):
         return max([tx.nonce for b in chain for tx in b.transactions
                     if tx.sender == address and tx.sender != "COINBASE"], default=-1)+1
+
     def replace_chain(self, candidate):
         if not self.validate_chain(candidate): return False
         work = lambda c: sum(16**b.difficulty for b in c[1:])

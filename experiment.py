@@ -1,4 +1,3 @@
-"""Вимірювання часу Proof of Work та графік."""
 import time, statistics
 from block import Block
 

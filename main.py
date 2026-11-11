@@ -1,4 +1,3 @@
-"""Консольний інтерфейс."""
 import argparse, json, time, urllib.request
 from wallet import Wallet
 from transaction import Transaction

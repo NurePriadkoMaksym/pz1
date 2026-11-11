@@ -1,4 +1,4 @@
-"""HTTP-вузол для обміну транзакціями та блоками."""
+
 from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 from urllib.request import Request, urlopen
 from urllib.error import URLError, HTTPError
@@ -16,8 +16,6 @@ def request_json(url, method="GET", data=None, timeout=2):
             raw = response.read()
             return json.loads(raw) if raw else {}
     except HTTPError as e:
-        # Сервер повертає пояснення помилки у JSON, але urllib за замовчуванням
-        # показує лише загальний код HTTP. Прочитаємо тіло відповіді.
         raw = e.read()
         try:
             details = json.loads(raw.decode("utf-8")) if raw else {}

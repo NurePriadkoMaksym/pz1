@@ -1,4 +1,3 @@
-"""Детермінована модель транзакції."""
 import hashlib, json
 from dataclasses import dataclass, asdict
 from wallet import Wallet, b64

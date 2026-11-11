@@ -1,4 +1,3 @@
-"""Гаманці на Ed25519. Приватний ключ ніколи не передається вузлам."""
 import base64, hashlib
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 from cryptography.hazmat.primitives import serialization
